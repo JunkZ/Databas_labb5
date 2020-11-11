@@ -11,7 +11,7 @@ Product: <input type="text" name="searched">
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "123";
 $dbname = "myDB";
 $searched = $_GET["searched"];
 

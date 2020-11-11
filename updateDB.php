@@ -8,8 +8,8 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
-$dbname = "mydb";
+$password = "123";
+$dbname = "myDB";
 $PID = $_POST["PID"];
 $PNAME = $_POST["PName"];
 
