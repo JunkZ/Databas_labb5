@@ -1,0 +1,88 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`produkt`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`produkt` (
+  `ProductID` INT(11) NOT NULL,
+  `ProductName` TEXT NOT NULL,
+  `Tillagt datum` DATETIME NOT NULL,
+  `Pris` INT NOT NULL,
+  `Lagersaldo` INT NOT NULL,
+  PRIMARY KEY (`ProductID`))
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Customer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Customer` (
+  `Användarnamn` VARCHAR(45) NOT NULL,
+  `Födelsedag` VARCHAR(45) NULL,
+  `Address` VARCHAR(45) NULL,
+  `Telefon NR` VARCHAR(45) NULL,
+  `Lösenord` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Användarnamn`)
+)
+
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Adminstrator` (
+  `Admin Flagga` INT NOT NULL,
+  `Customer_Användarnamn` VARCHAR(45) NOT NULL,
+  INDEX `fk_Adminstrator_Customer1_idx` (`Customer_Användarnamn` ASC) VISIBLE,
+  PRIMARY KEY (`Customer_Användarnamn`),
+  CONSTRAINT `fk_Adminstrator_Customer1`
+    FOREIGN KEY (`Customer_Användarnamn`)
+    REFERENCES `mydb`.`Customer` (`Användarnamn`)
+)
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Varukorg`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Varukorg` (
+  `Kvantitet` INT NULL,
+  `Customer_Användarnamn` VARCHAR(45) NOT NULL,
+  `produkt_ProductID` INT(11) NOT NULL,
+  INDEX `fk_Varukorg_Customer1_idx` (`Customer_Användarnamn` ASC) VISIBLE,
+  PRIMARY KEY (`Customer_Användarnamn`),
+  INDEX `fk_Varukorg_produkt1_idx` (`produkt_ProductID` ASC) VISIBLE,
+  CONSTRAINT `fk_Varukorg_Customer1`
+    FOREIGN KEY (`Customer_Användarnamn`)
+    REFERENCES `mydb`.`Customer` (`Användarnamn`)
+  CONSTRAINT `fk_Varukorg_produkt1`
+    FOREIGN KEY (`produkt_ProductID`)
+    REFERENCES `mydb`.`produkt` (`ProductID`)
+)
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Kategorier`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Kategorier` (
+  `ProductID` INT(11) NOT NULL,
+  `Kategori Namn` VARCHAR(45) NOT NULL,
+  INDEX `fk_Kategorier_produkt1_idx` (`ProductID` ASC) VISIBLE,
+  PRIMARY KEY (`Kategori Namn`),
+  CONSTRAINT `fk_Kategorier_produkt1`
+    FOREIGN KEY (`ProductID`)
+    REFERENCES `mydb`.`produkt` (`ProductID`))
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

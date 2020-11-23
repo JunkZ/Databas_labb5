@@ -1,19 +1,11 @@
 <html>
 <body>
-
-<form action="admin.php" method="post">
-<input type="submit" value="Back to adminpage"> 
-</form>
-
+<p> List of products: </p>
 <?php
 $servername = "localhost";
 $username = "root";
 $password = "123";
-$dbname = "mydb";
-$PID = $_POST["PID"];
-$PNAME = $_POST["PName"];
-$PPRICE = $_POST["PPrice"];
-$PSALDO = $_POST["PSaldo"];
+$dbname = "myDB";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
@@ -22,10 +14,18 @@ $conn = new mysqli($servername, $username, $password,$dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-$sql = "INSERT INTO produkt VALUES ('$PID', '$PNAME',CURRENT_TIMESTAMP(),'$PPRICE','$PSALDO');";
+$sql = "SELECT * FROM produkt";
 $result = $conn->query($sql);
 
-
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo "id: " . $row["ProductID"]. " - Name: " . $row["ProductName"]. " <br>";
+  }
+} else {
+  echo "0 results";
+}
+$conn->close();
 
 ?>
 

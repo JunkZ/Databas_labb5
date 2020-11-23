@@ -7,6 +7,8 @@
 <form action="updateDB.php" method="post">
 ProductName: <input type="text" name="PName">
 ProductID: <input type="text" name="PID">
+ProductPrice: <input type="text" name="PPrice">
+ProductSaldo: <input type="text" name="PSaldo">
 <input type="submit" value="Insert product!"> 
 </form>
 

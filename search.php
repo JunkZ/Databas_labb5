@@ -12,7 +12,7 @@ Product: <input type="text" name="searched">
 $servername = "localhost";
 $username = "root";
 $password = "123";
-$dbname = "myDB";
+$dbname = "mydb";
 $searched = $_GET["searched"];
 
 // Create connection
@@ -22,7 +22,7 @@ $conn = new mysqli($servername, $username, $password,$dbname);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT * FROM products WHERE ProductName LIKE '%$searched%';";
+$sql = "SELECT * FROM produkt WHERE ProductName LIKE '%$searched%';";
 $result = $conn->query($sql);
 while($row = mysqli_fetch_array($result)) {
 	echo "Produktnamn: ";
