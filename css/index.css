@@ -1,0 +1,59 @@
+.button {
+  display: flex;
+  background-color:  rgb(13, 51, 100);
+  border:2px solid #131111;
+  color: rgb(255, 255, 255);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  
+}
+.button:hover {
+  background: rgb(87, 175, 216)  ;
+  color: white;
+}
+#box{
+  border: 10px rgb(0, 0, 0);
+  padding: 15px 10px;
+  background: rgb(255, 255, 255);
+  border-width: medium;  
+  border-style: solid;
+  width: 310px;
+  height: 100px;
+}
+.serif {
+  font-style: oblique;
+  font-size: 30px;
+  padding-left: 100px;
+}
+.posadmin{
+  display: inline-block;
+  position: relative;
+    left: 10%
+}
+.posproducts{
+  display: inline-block;
+  position: relative;
+    left: 7%;
+}
+
+.add{
+  position: relative;
+    top: 20%;
+    left: 5%;
+   
+}
+input[type=text], select {
+  width: 50%;
+  padding: 5px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+

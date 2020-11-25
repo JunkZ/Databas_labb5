@@ -1,15 +1,22 @@
 <html>
 <body>
-<p>Please don't spam insert values since were gonna have to delete all of them later </p>
+<head>
+    <link rel="stylesheet" href="css/admin.css" />
+</head>
+<p class=serif>Please don't spam insert values since were gonna have to delete all of them later </p>
 <form action="index.php" method="post">
-<input type="submit" value="Back to home"> 
+<input type="submit" value="Back to home" class="button"> 
 </form>
-<form action="updateDB.php" method="post">
-ProductName: <input type="text" name="PName">
-ProductID: <input type="text" name="PID">
-ProductPrice: <input type="text" name="PPrice">
-ProductSaldo: <input type="text" name="PSaldo">
-<input type="submit" value="Insert product!"> 
+<form action="updateDB.php" method="post" >
+<input type="text" name="PName" placeholder="Productname....">
+</br><br>
+<input type="text" name="PID" placeholder="ProductID...">
+</br><br>
+<input type="text" name="PPrice" placeholder="ProductPrice...">
+</br><br>
+<input type="text" name="PSaldo" placeholder="ProductSaldo...">
+</br><br>
+<input type="submit" value="Insert product!" class="button"> 
 </form>
 
 

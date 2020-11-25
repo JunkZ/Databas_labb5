@@ -1,6 +1,9 @@
 <html>
 <body>
-<p> List of products: </p>
+<head>
+    <link rel="stylesheet" href="css/products.css" />
+</head>
+<p class=serif> List of products </p>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -20,7 +23,8 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo "id: " . $row["ProductID"]. " - Name: " . $row["ProductName"]. " <br>";
+    echo "id: " . $row["ProductID"]. " - Name: " . $row["ProductName"]. " 
+    - Pris: " . $row["Pris"]. " - Saldo: " . $row["Lagersaldo"]. "<br>";
   }
 } else {
   echo "0 results";

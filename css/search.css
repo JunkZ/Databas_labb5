@@ -1,0 +1,36 @@
+.button {
+    display: flex;
+    background-color:  rgb(13, 51, 100);
+    border:2px solid #131111;
+    color: rgb(255, 255, 255);
+    padding: 2px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    
+  }
+  .button1 {
+    display: flex;
+    background-color:  rgb(13, 51, 100);
+    border:2px solid #131111;
+    color: rgb(255, 255, 255);
+    padding: 0.1px 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    
+  }
+  .button:hover {
+    background: rgb(87, 175, 216)  ;
+    color: white;
+  }
+  .button1:hover {
+    background: rgb(87, 175, 216)  ;
+    color: white;
+  }
