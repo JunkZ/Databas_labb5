@@ -1,21 +1,24 @@
 <html>
 <body>
-<p> Welcome! </p>
+<head>
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+<p class=serif> Welcome! </p>
+<div id="box"><div>
 
-<p>Product list:</p>
-<form action="list.php" method="post">
-<input type="submit" value="Product list">
+<form action="list.php" method="post" class=posproducts>
+<input type="submit" value="Product list" class="button">
 </form>
 
-<p>Search:</p>
-<form action="search.php" method="get">
-Product: <input type="text" name="searched">
-<input type="submit"> 
+
+<form action="admin.php" method="post" class=posadmin>
+<input type="submit" value="Admin page" class="button">
 </form>
 
-<p>Admin page:</p>
-<form action="admin.php" method="post">
-<input type="submit" value="Admin page">
+
+<form action="search.php" method="get" class=add>
+<input type="text" name="searched" placeholder="Product to lookup...">
+<input type="submit" class="button" value="Search"> 
 </form>
 
 

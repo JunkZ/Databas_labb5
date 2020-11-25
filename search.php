@@ -1,11 +1,14 @@
 <html>
 <body>
+<head>
+    <link rel="stylesheet" href="css/search.css" />
+</head>
 <form action="index.php" method="post">
-<input type="submit" value="Back to home"> 
+<input type="submit" value="Back to home" class="button"> 
 </form>
 <form action="search.php" method="get">
-Product: <input type="text" name="searched">
-<input type="submit"> 
+<input type="text" name="searched" placeholder="Product to lookup..">
+<input type="submit" class="button1" value="Search"> 
 </form>
 
 <?php
@@ -29,6 +32,10 @@ while($row = mysqli_fetch_array($result)) {
     echo $row['ProductName'];
 	echo ", ProduktID:   ";
 	echo $row['ProductID'];
+	echo ", Pris:   ";
+	echo $row['Pris'];
+	echo ", Saldo:   ";
+	echo $row['Lagersaldo'];
 	echo "<br>";// Print a single column data
 }
 
