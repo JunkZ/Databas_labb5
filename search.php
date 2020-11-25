@@ -32,6 +32,8 @@ while($row = mysqli_fetch_array($result)) {
     echo $row['ProductName'];
 	echo ", ProduktID:   ";
 	echo $row['ProductID'];
+	echo ", Tillagt Datum: ";
+    echo $row['Tillagt datum'];
 	echo ", Pris:   ";
 	echo $row['Pris'];
 	echo ", Saldo:   ";

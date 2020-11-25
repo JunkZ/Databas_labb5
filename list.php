@@ -6,7 +6,10 @@
     <head>
       <link rel="stylesheet" href="css/products.css" />
     </head>
-    <h1 class=serif> Produktlista: </h1>
+	<form action="index.php" method="post">
+<input type="submit" value="Back to home" class="button"> 
+</form>
+    <h1 class=serif> Produkt list: </h1>
     <?php
     $servername = "localhost";
     $username = "root";
@@ -26,10 +29,10 @@
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
         echo "<span id=\"lst\"><strong>ProductID: </strong>" . $row["ProductID"]
-          . " | <strong>Produkt Namn: </strong>" . $row["ProductName"]
-          . " |<strong> Datum: </strong>" . $row["Tillagt datum"]
-          . " | <strong>Pris: </strong>" . $row["Pris"]
-          . " | <strong>Lagersaldo: </strong>" . $row["Lagersaldo"]
+          . " | <strong>Produkt Name: </strong>" . $row["ProductName"]
+          . " |<strong> Date: </strong>" . $row["Tillagt datum"]
+          . " | <strong>Price: </strong>" . $row["Pris"]
+          . " | <strong>Stock: </strong>" . $row["Lagersaldo"]
           . "</span><br>";
       }
     } else {
@@ -37,7 +40,7 @@
     }
     $sql = "SELECT * FROM kategorier";
     $result = $conn->query($sql);
-    echo "<br><h1 class=serif>Kategorilista: </h1>";
+    echo "<br><h1 class=serif>Category list: </h1>";
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
         echo "<span id=\"lst\"><strong>ProductID FK: </strong>" . $row["ProductID"]
@@ -45,7 +48,7 @@
           . "</span><br>";
       }
     } else {
-      echo "Inga resultat!";
+      echo "No results!";
     }
     $conn->close();
 
