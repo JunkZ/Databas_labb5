@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
 <body>
 <head>
@@ -18,7 +21,14 @@
 </br><br>
 <input type="submit" value="Insert product!" class="button"> 
 </form>
-
+<?php
+if ($_SESSION["Admin"] != "true") {
+	header("location: index.php");
+    exit;
+} else {
+	echo "välkommen herr admin";
+}
+?>
 
 </body>
 </html>
