@@ -33,6 +33,7 @@ $row2 =$resultADMIN->fetch_assoc();
 
 if ($row['Användarnamn']==$ANAMN && $row['Lösenord']==$PASS){
 	$_SESSION["loggedIN"] = "true";
+	$_SESSION["username"] = $row['Användarnamn'];
 	echo "You have successfully logged in as ", $row['Användarnamn'],"<br>And you are ";
 	if ($row2['Admin Flagga']==1){
 		echo "an Admin!";
