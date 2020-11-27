@@ -54,11 +54,12 @@ Password: <input type="text" name="PASS">
 <input type="submit" value="Log in!" class="buttonlog">
 </form>
 
-<form action="admin.php" method="post" <?php if($_SESSION["Admin"] == "false") echo 'style="display:none"';?>>
-<input type="submit" value="Admin page" class="button" >
+<form action="admin.php" method="post" class=posadmin <?php if($_SESSION["Admin"] == "false") echo 'style="display:none"';?>>
+<input type="submit" value="Admin page" class="buttonadmin" >
 </form>
-<form action="logout.php" method="post" class=posproducts <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
-<input type="submit" value="Logout" class="button">
+<br>
+<form action="logout.php" method="post" class=poslogout <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
+<input type="submit" value="Logout" class="buttonlogout">
 </form>
 </body>
 </html>

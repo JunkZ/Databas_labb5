@@ -9,7 +9,7 @@
 	<form action="index.php" method="post">
 <input type="submit" value="Back to home" class="button"> 
 </form>
-    <h1 class=serif> Produkt list: </h1>
+    <h1 class=serif> Product list: </h1>
     <?php
     $servername = "localhost";
     $username = "root";
@@ -29,7 +29,7 @@
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
         echo "<span id=\"lst\"><strong>ProductID: </strong>" . $row["ProductID"]
-          . " | <strong>Produkt Name: </strong>" . $row["ProductName"]
+          . " | <strong>Product Name: </strong>" . $row["ProductName"]
           . " |<strong> Date: </strong>" . $row["Tillagt datum"]
           . " | <strong>Price: </strong>" . $row["Pris"]
           . " | <strong>Stock: </strong>" . $row["Lagersaldo"]
