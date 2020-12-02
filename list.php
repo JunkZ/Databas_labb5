@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
 
 <body>
@@ -7,8 +10,11 @@
       <link rel="stylesheet" href="css/products.css" />
     </head>
 	<form action="index.php" method="post">
-<input type="submit" value="Back to home" class="button"> 
-</form>
+	<input type="submit" value="Back to home" class="button"> 
+	</form>
+	<form action="viewcart.php" method="post" class=poslogout <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
+	<input type="submit" value="View cart" class="buttonlogout">
+	</form>
     <h1 class=serif> Product list: </h1>
     <?php
     $servername = "localhost";
@@ -28,12 +34,21 @@
 
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
+		$id = $row["ProductID"];
+		//echo $id;
         echo "<span id=\"lst\"><strong>ProductID: </strong>" . $row["ProductID"]
           . " | <strong>Product Name: </strong>" . $row["ProductName"]
           . " |<strong> Date: </strong>" . $row["Tillagt datum"]
           . " | <strong>Price: </strong>" . $row["Pris"]
           . " | <strong>Stock: </strong>" . $row["Lagersaldo"]
-          . "</span><br>";
+          . "</span>";
+		  ?>
+		  <form action="tocart.php" method="post" <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
+		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">  
+		  <input type="submit" value="Add to cart" ></form>
+		  <?php
+		  echo "<br>";
+		  
       }
     } else {
       echo "Inga resultat!";

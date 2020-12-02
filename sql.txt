@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Varukorg` (
   `Customer_Användarnamn` VARCHAR(45) NOT NULL,
   `produkt_ProductID` INT(11) NOT NULL,
   INDEX `fk_Varukorg_Customer1_idx` (`Customer_Användarnamn` ASC),
-  PRIMARY KEY (`Customer_Användarnamn`),
+  PRIMARY KEY (`Customer_Användarnamn`,`produkt_ProductID`),
   INDEX `fk_Varukorg_produkt1_idx` (`produkt_ProductID` ASC),
   CONSTRAINT `fk_Varukorg_Customer1`
     FOREIGN KEY (`Customer_Användarnamn`)

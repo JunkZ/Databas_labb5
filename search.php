@@ -1,15 +1,17 @@
+<?php
+session_start();
+?>
 <html>
 <body>
 <head>
     <link rel="stylesheet" href="css/search.css" />
 </head>
 <form action="index.php" method="post">
-<input type="submit" value="Back to home" class="button"> 
-</form>
-<form action="search.php" method="get">
-<input type="text" name="searched" placeholder="Product to lookup..">
-<input type="submit" class="button1" value="Search"> 
-</form>
+	<input type="submit" value="Back to home" class="button"> 
+	</form>
+	<form action="viewcart.php" method="post" class=poslogout <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
+	<input type="submit" value="View cart" class="buttonlogout">
+	</form>
 
 <?php
 $servername = "localhost";
@@ -28,16 +30,17 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM produkt WHERE ProductName LIKE '%$searched%';";
 $result = $conn->query($sql);
 while($row = mysqli_fetch_array($result)) {
-	echo "Produktnamn: ";
-    echo $row['ProductName'];
-	echo ", ProduktID:   ";
-	echo $row['ProductID'];
-	echo ", Tillagt Datum: ";
-    echo $row['Tillagt datum'];
-	echo ", Pris:   ";
-	echo $row['Pris'];
-	echo ", Saldo:   ";
-	echo $row['Lagersaldo'];
+	echo "<span id=\"lst\"><strong>ProductID: </strong>" . $row["ProductID"]
+          . " | <strong>Product Name: </strong>" . $row["ProductName"]
+          . " |<strong> Date: </strong>" . $row["Tillagt datum"]
+          . " | <strong>Price: </strong>" . $row["Pris"]
+          . " | <strong>Stock: </strong>" . $row["Lagersaldo"]
+          . "</span>";
+	?>
+		  <form action="tocart.php" method="post" <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
+		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">  
+		  <input type="submit" value="Add to cart" ></form>
+		  <?php
 	echo "<br>";// Print a single column data
 }
 
