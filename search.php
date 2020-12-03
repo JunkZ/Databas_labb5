@@ -37,8 +37,9 @@ while($row = mysqli_fetch_array($result)) {
           . " | <strong>Stock: </strong>" . $row["Lagersaldo"]
           . "</span>";
 	?>
-		  <form action="tocart.php" method="post" <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
-		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">  
+		  <form action="updatecart.php" method="post" <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
+		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>"> 
+		  <input type ="hidden" name="action" value="add">		  
 		  <input type="submit" value="Add to cart" ></form>
 		  <?php
 	echo "<br>";// Print a single column data

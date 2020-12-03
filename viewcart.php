@@ -27,7 +27,7 @@ $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName';";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+      while ($row = mysqli_fetch_array($result)) {
 		$prodid = $row["produkt_ProductID"];
 		$sql = "SELECT * FROM produkt WHERE ProductID = '$prodid';";
 		$resultProdukt = $conn->query($sql);
@@ -38,7 +38,12 @@ $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName';";
           . " | <strong>Kvantitet: </strong>" . $row["Kvantitet"]
           . "</span>";
 		  echo "<br>";
-		  
+		  ?>
+		  <form action="updatecart.php" method="post">
+		  <input type="hidden" name="prodid" value="<?php echo "$prodid"; ?>">  
+		  <input type ="hidden" name="action" value="deleteWhole">
+		  <input type="submit" value="Delete" ></form>
+		  <?php
       }
     } else {
       echo "Inga resultat!";

@@ -33,7 +33,7 @@ session_start();
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+      while ($row = mysqli_fetch_array($result)) {
 		$id = $row["ProductID"];
 		//echo $id;
         echo "<span id=\"lst\"><strong>ProductID: </strong>" . $row["ProductID"]
@@ -43,9 +43,10 @@ session_start();
           . " | <strong>Stock: </strong>" . $row["Lagersaldo"]
           . "</span>";
 		  ?>
-		  <form action="tocart.php" method="post" <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
+		  <form action="updatecart.php" method="post" <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
 		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">  
-		  <input type="submit" value="Add to cart" ></form>
+		  <input type ="hidden" name="action" value="add">
+		  <input type="submit" value="<?php echo $row["ProductID"]; ?>" ></form>
 		  <?php
 		  echo "<br>";
 		  

@@ -61,5 +61,6 @@ Password: <input type="text" name="PASS">
 <form action="logout.php" method="post" class=poslogout <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
 <input type="submit" value="Logout" class="buttonlogout">
 </form>
+
 </body>
 </html>
