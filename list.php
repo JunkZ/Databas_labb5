@@ -46,7 +46,7 @@ session_start();
 		  <form action="updatecart.php" method="post" <?php if($_SESSION["loggedIN"] == "false") echo 'style="display:none"';?>>
 		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">  
 		  <input type ="hidden" name="action" value="add">
-		  <input type="submit" value="<?php echo $row["ProductID"]; ?>" ></form>
+		  <input type="submit" value="Add to cart" ></form>
 		  <?php
 		  echo "<br>";
 		  
