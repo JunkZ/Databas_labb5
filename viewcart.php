@@ -25,10 +25,9 @@ if ($conn->connect_error) {
 }
 $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName';";
     $result = $conn->query($sql);
-
     if ($result->num_rows > 0) {
       while ($row = mysqli_fetch_array($result)) {
-		$prodid = $row["produkt_ProductID"];
+    $prodid = $row["produkt_ProductID"];
 		$sql = "SELECT * FROM produkt WHERE ProductID = '$prodid';";
 		$resultProdukt = $conn->query($sql);
 		$produktArray = mysqli_fetch_array($resultProdukt); 
@@ -50,4 +49,6 @@ $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName';";
     }
 ?>
 </body>
+<form action="checkout.php" method="post" >
+<input type="submit" value="Checkout" class="button"> 
 </html>

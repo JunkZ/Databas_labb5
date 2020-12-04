@@ -34,6 +34,7 @@ session_start();
 
     if ($result->num_rows > 0) {
       while ($row = mysqli_fetch_array($result)) {
+    if ($row["Lagersaldo"] > 0) {
 		$id = $row["ProductID"];
 		//echo $id;
         echo "<span id=\"lst\"><strong>ProductID: </strong>" . $row["ProductID"]
@@ -50,7 +51,11 @@ session_start();
 		  <?php
 		  echo "<br>";
 		  
+      } else {
+        echo "Product \"".$row["ProductName"]."\" is out of stock! <br><br>";
       }
+    
+    }
     } else {
       echo "Inga resultat!";
     }
