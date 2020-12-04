@@ -39,13 +39,19 @@ while ($row = mysqli_fetch_array($result)) {
     $result = $conn->query($sql);
     $row = mysqli_fetch_array($result);
     //echo "<br> LAGERSALDO:".$row["Lagersaldo"]."<br>";
-    $newvalue = $row["Lagersaldo"] - $quantity;
+    if ($row["Lagersaldo"] > 0) {
+        $newvalue = $row["Lagersaldo"] - $quantity;
     //echo "<br> NEW VALUE:".$newvalue."<br>";
 
     //uppdate lagersaldo
     $sql = "UPDATE produkt SET lagersaldo=$newvalue WHERE ProductID = $prodid;";
     $conn->query($sql);
     echo $quantity. " of product ". $prodid . " has been ordered!<br>";
+    } else {
+        echo "Last quantity has already been ordered";
+        $conn->rollback();
+    }
+    
 }
 
 
