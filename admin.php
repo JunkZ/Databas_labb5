@@ -8,7 +8,7 @@ session_start();
 </head>
 <p class=serif>Please don't spam insert values since were gonna have to delete all of them later </p>
 <form action="index.php" method="post">
-<input type="submit" value="Back to home" class="button"> 
+<input type="submit" value="Back to home" class="button">
 </form>
 <form action="updateDB.php" method="post" >
 <input type="text" name="PName" placeholder="Productname....">
@@ -19,14 +19,14 @@ session_start();
 </br><br>
 <input type="text" name="PSaldo" placeholder="ProductSaldo...">
 </br><br>
-<input type="submit" value="Insert product!" class="button"> 
+<input type="submit" value="Insert product!" class="button">
 </form>
 <?php
 if ($_SESSION["Admin"] != "true") {
-	header("location: index.php");
+    header("location: index.php");
     exit;
 } else {
-	echo "välkommen herr admin";
+    echo "välkommen herr admin";
 }
 ?>
 

@@ -5,46 +5,41 @@ session_start();
 <body>
 
 	<form action="index.php" method="post">
-	<input type="submit" value="Back to home" class="button"> 
+	<input type="submit" value="Back to home" class="button">
 	</form>
 	<form action="viewcart.php" method="post" >
 	<input type="submit" value="View cart" class="button">
 	</form>
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "123";
-$dbname = "mydb";
+include_once 'dbini/db_handler.php';
+$conn;
 $action = $_POST["action"];
 $prodid = $_POST["prodid"];
 $uName = $_SESSION['username'];
 
-$conn = new mysqli($servername, $username, $password,$dbname);
+if ($action == "add") {
+    $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName'
+    AND produkt_ProductID = '$prodid' AND Order_ID is NULL;";
+    $result = $conn->query($sql);
 
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-if ($action == "add"){
-	$sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName' AND produkt_ProductID = '$prodid';";
-	$result = $conn->query($sql);
-
-	if(mysqli_num_rows($result) > 0)
-	{
-		$row = mysqli_fetch_array($result);
-		$newValue = $row["Kvantitet"] + 1;
-		$sql = "UPDATE varukorg SET Kvantitet = $newValue WHERE Customer_Användarnamn = '$uName' AND produkt_ProductID = '$prodid';"; 
-		$conn->query($sql);
-	} else {
-		$sql = "INSERT INTO varukorg VALUES (1,'$uName', '$prodid');";
-		$conn->query($sql);
-	}
-	echo "successfully added to cart";
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_array($result);
+        $newValue = $row["Kvantitet"] + 1;
+        $sql = "UPDATE varukorg SET Kvantitet = $newValue WHERE Customer_Användarnamn = '$uName'
+        AND produkt_ProductID = '$prodid'
+        AND Order_ID is NULL;";
+        $conn->query($sql);
+    } else {
+        $sql = "INSERT INTO varukorg (Kvantitet,Customer_Användarnamn,produkt_ProductID,Order_ID)
+        VALUES (1,'$uName', '$prodid',NULL);";
+        $conn->query($sql);
+    }
+    echo "successfully added to cart";
 } else if ($action == "deleteWhole") {
-	$sql = "DELETE FROM varukorg WHERE Customer_Användarnamn = '$uName' AND produkt_ProductID = '$prodid';";
-	$conn->query($sql);
-	echo "successfully removed from cart";
+    $sql = "DELETE FROM varukorg WHERE Customer_Användarnamn = '$uName' AND produkt_ProductID = '$prodid';";
+    $conn->query($sql);
+    echo "successfully removed from cart";
 }
 
 ?>
