@@ -7,7 +7,7 @@ session_start();
   <p>
 
     <head>
-      <link rel="stylesheet" href="css/products.css" />
+      <link rel="stylesheet" href="css/search.css"/>
     </head>
 	<form action="index.php" method="post">
 	<input type="submit" value="Back to home" class="button">
