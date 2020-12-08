@@ -6,6 +6,12 @@ session_start();
 <head>
     <link rel="stylesheet" href="css/index.css" />
 </head>
+
+
+<form action="list.php" method="post" >
+<input type="submit" value="Keep shopping" class="button">
+</form>
+
 <form action="index.php" method="post" >
 <input type="submit" value="Back to home" class="button">
 </form>
