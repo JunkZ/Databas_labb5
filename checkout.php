@@ -15,7 +15,6 @@ include_once 'dbini/db_handler.php';
 include_once 'dbini/db_handler.php';
 $conn;
 $uName = $_SESSION['username'];
-$test=0;
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
