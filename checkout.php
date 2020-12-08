@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 } else {
     try {
         $conn->begin_transaction();
-        $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName';";
+        $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName' AND Order_ID is NULL;";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_array($result)) {
             $sql = "INSERT INTO `order`(`OrderID`) VALUES ('')";
@@ -36,8 +36,8 @@ if ($conn->connect_error) {
             $prodid = $row["produkt_ProductID"];
             $quantity = $row["Kvantitet"];
             $sql = "SELECT * FROM produkt WHERE ProductID = $prodid;";
-            $result = $conn->query($sql);
-            $row = mysqli_fetch_array($result);
+            $result1 = $conn->query($sql);
+            $row = mysqli_fetch_array($result1);
             //echo "<br> LAGERSALDO:".$row["Lagersaldo"]."<br>";
             if ($row["Lagersaldo"] > 0) {
                 $newvalue = $row["Lagersaldo"] - $quantity;
