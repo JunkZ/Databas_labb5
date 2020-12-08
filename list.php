@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
 		    $sql = "SELECT * FROM rating WHERE produkt_ProductID =  '$prodid' ;";
 		    $resultRating = $conn->query($sql);
 		    $rating = mysqli_fetch_array($resultRating);
-		    if($rating["RatingNR"] != NULL){
+		    if(isset($rating["RatingNR"])){
 			    $points = $rating["RatingPoints"];
 			    $nr = $rating["RatingNR"];
 			    $nr = $points / $nr;
