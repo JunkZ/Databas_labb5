@@ -1,4 +1,4 @@
--- MySQL Workbench Forward Engineering
+ -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -52,36 +52,70 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Adminstrator` (
 DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
+-- Table `mydb`.`Order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Order` (
+  `OrderID` INT(11) NULL AUTO_INCREMENT,
+  PRIMARY KEY (`OrderID`))
+  DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Rating`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Rating` (
+  `RatingNR` INT(11) NULL,
+  `RatingPoints` INT(11) NULL,
+  `produkt_ProductID` INT(11) NOT NULL,
+  PRIMARY KEY (`produkt_ProductID`),
+  CONSTRAINT `fk_Rating_produkt1`
+    FOREIGN KEY (`produkt_ProductID`)
+    REFERENCES `mydb`.`produkt` (`ProductID`))
+  DEFAULT CHARACTER SET = utf8mb4;
+
+-- -----------------------------------------------------
 -- Table `mydb`.`Varukorg`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Varukorg` (
   `Kvantitet` INT NULL,
   `Customer_Användarnamn` VARCHAR(45) NOT NULL,
   `produkt_ProductID` INT(11) NOT NULL,
+  `Order_ID` INT(11) NULL,
+  `VarukorgID` INT NOT NULL AUTO_INCREMENT,
   INDEX `fk_Varukorg_Customer1_idx` (`Customer_Användarnamn` ASC),
-  PRIMARY KEY (`Customer_Användarnamn`,`produkt_ProductID`),
   INDEX `fk_Varukorg_produkt1_idx` (`produkt_ProductID` ASC),
+  INDEX `fk_Varukorg_Order1_idx` (`Order_ID` ASC),
+  PRIMARY KEY (`VarukorgID`),
+  
   CONSTRAINT `fk_Varukorg_Customer1`
     FOREIGN KEY (`Customer_Användarnamn`)
     REFERENCES `mydb`.`Customer` (`Användarnamn`),
   CONSTRAINT `fk_Varukorg_produkt1`
     FOREIGN KEY (`produkt_ProductID`)
-    REFERENCES `mydb`.`produkt` (`ProductID`)
-)
+    REFERENCES `mydb`.`produkt` (`ProductID`),
+  CONSTRAINT `fk_Varukorg_Order1`
+    FOREIGN KEY (`Order_ID`)
+    REFERENCES `mydb`.`Order` (`OrderID`))
+
+
 DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Kategorier`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Kategorier` (
+  `KategoriID` INT(11) NULL,
   `ProductID` INT(11) NOT NULL,
   `Kategori Namn` VARCHAR(45) NOT NULL,
   INDEX `fk_Kategorier_produkt1_idx` (`ProductID` ASC),
-  PRIMARY KEY (`Kategori Namn`),
+  PRIMARY KEY (`KategoriID`),
   CONSTRAINT `fk_Kategorier_produkt1`
     FOREIGN KEY (`ProductID`)
     REFERENCES `mydb`.`produkt` (`ProductID`))
 DEFAULT CHARACTER SET = utf8mb4;
+
+
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

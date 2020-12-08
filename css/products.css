@@ -1,6 +1,8 @@
 .serif {
-    font-style: oblique;
-    font-size: 30px;
-  }
+  font-style: oblique;
+  font-size: 30px;
+}
 
-#lst { border: 1px solid black; }
+#lst {
+  border: 1px solid black;
+}
