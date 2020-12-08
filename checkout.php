@@ -22,7 +22,11 @@ if ($conn->connect_error) {
 } else {
     try {
         $conn->begin_transaction();
+<<<<<<< HEAD
+        $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName' AND Order_ID is NULL;";
+=======
         $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName';";
+>>>>>>> c18ca6dbfd83c1fe634730a08563fc8c78c44e01
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_array($result)) {
             $sql = "INSERT INTO `order`(`OrderID`) VALUES ('')";
@@ -36,8 +40,13 @@ if ($conn->connect_error) {
             $prodid = $row["produkt_ProductID"];
             $quantity = $row["Kvantitet"];
             $sql = "SELECT * FROM produkt WHERE ProductID = $prodid;";
+<<<<<<< HEAD
+            $result1 = $conn->query($sql);
+            $row = mysqli_fetch_array($result1);
+=======
             $result = $conn->query($sql);
             $row = mysqli_fetch_array($result);
+>>>>>>> c18ca6dbfd83c1fe634730a08563fc8c78c44e01
             //echo "<br> LAGERSALDO:".$row["Lagersaldo"]."<br>";
             if ($row["Lagersaldo"] > 0) {
                 $newvalue = $row["Lagersaldo"] - $quantity;
@@ -56,6 +65,10 @@ if ($conn->connect_error) {
 
         $conn->commit();
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> c18ca6dbfd83c1fe634730a08563fc8c78c44e01
     } catch (mysqli_sql_exception $exception) {
         $conn->rollback();
         echo "Something went wrong rolling back...";
