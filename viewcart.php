@@ -10,6 +10,10 @@ session_start();
 <input type="submit" value="Back to home" class="button">
 </form>
 
+<form action="list.php" method="post" >
+<input type="submit" value="Continue shopping" class="button">
+</form>
+
 <?php
 include_once 'dbini/db_handler.php';
 $conn;
