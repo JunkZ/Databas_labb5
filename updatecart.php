@@ -37,7 +37,7 @@ if ($action == "add") {
     }
     echo "successfully added to cart";
 } else if ($action == "deleteWhole") {
-    $sql = "DELETE FROM varukorg WHERE Customer_Användarnamn = '$uName' AND produkt_ProductID = '$prodid';";
+    $sql = "DELETE FROM varukorg WHERE Customer_Användarnamn = '$uName' AND produkt_ProductID = '$prodid' AND Order_ID IS NULL;";
     $conn->query($sql);
     echo "successfully removed from cart";
 }

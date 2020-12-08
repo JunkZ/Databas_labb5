@@ -73,5 +73,12 @@ Password: <input type="text" name="PASS">
 <input type="submit" value="Logout" class="buttonlogout">
 </form>
 
+<form action="orderhistory.php" method="post" <?php if ($_SESSION["loggedIN"] == "false") {
+    echo 'style="display:none"';
+}
+?>> 
+<input type="submit" value="Order history" class="button">
+</body>
+
 </body>
 </html>
