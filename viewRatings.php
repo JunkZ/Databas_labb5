@@ -32,7 +32,9 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = mysqli_fetch_array($result)) {
       if($row["comment"] != ""){
-	  echo $row["comment"] . "  " . $row["rating"] . "/5    "  . $row["customer_Användarnamn"] . "   " .  $row["datum"];
+		echo $row["comment"] . "  " . $row["rating"] . "/5    "  . $row["customer_Användarnamn"] . "   " .  $row["datum"];
+	  }else  {
+		echo "~User made no comment~    " . $row["rating"] . "/5    "  . $row["customer_Användarnamn"] . "   " .  $row["datum"];
 	  }
 	  echo "<br>";
 }
