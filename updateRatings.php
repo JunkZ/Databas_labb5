@@ -13,20 +13,13 @@ include_once 'dbini/db_handler.php';
 $conn;
 $rating = $_POST["rating"];
 $prodid = $_POST["prodid"];
+$comment = $_POST["comment"];
+$uName = $_SESSION['username'];
 
-$sql = "SELECT * FROM rating WHERE produkt_ProductID = '$prodid';";
-$result = $conn->query($sql);
+$sql = "INSERT INTO kommentarer (comment,rating,customer_Användarnamn,produkt_ProductID,datum) VALUES ('$comment','$rating','$uName','$prodid',CURDATE());";
+$conn->query($sql);
 
-if (mysqli_num_rows($result) > 0) {
-	$row = mysqli_fetch_array($result);
-	$newNR = $row["RatingNR"] + 1;
-	$newRating = $row["RatingPoints"] + $rating;
-	$sql = "UPDATE rating SET RatingNR = $newNR, RatingPoints = $newRating WHERE produkt_ProductID = '$prodid';";
-	$conn->query($sql);
-} else {
-	$sql = "INSERT INTO rating VALUES (1,'$rating','$prodid');";
-	$conn->query($sql);
-}
+
 echo "successfully added rating";
 
 ?>

@@ -59,18 +59,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Order` (
   PRIMARY KEY (`OrderID`))
   DEFAULT CHARACTER SET = utf8mb4;
 
--- -----------------------------------------------------
--- Table `mydb`.`Rating`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Rating` (
-  `RatingNR` INT(11) NULL,
-  `RatingPoints` INT(11) NULL,
-  `produkt_ProductID` INT(11) NOT NULL,
-  PRIMARY KEY (`produkt_ProductID`),
-  CONSTRAINT `fk_Rating_produkt1`
-    FOREIGN KEY (`produkt_ProductID`)
-    REFERENCES `mydb`.`produkt` (`ProductID`))
-  DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Varukorg`
@@ -114,7 +102,27 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Kategorier` (
 DEFAULT CHARACTER SET = utf8mb4;
 
 
+-- -----------------------------------------------------
+-- Table `mydb`.`Kommentarer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Kommentarer` (
+  `commentID` INT NOT NULL AUTO_INCREMENT,
+  `comment` TEXT(100) NULL,
+  `rating` INT NOT NULL,
+  `customer_Användarnamn` VARCHAR(45) NOT NULL,
+  `produkt_ProductID` INT(11) NOT NULL,
+  `datum` DATE NULL,
+  PRIMARY KEY (`commentID`),
+  INDEX `fk_Kommentarer_customer1_idx` (`customer_Användarnamn` ASC),
+  INDEX `fk_Kommentarer_produkt1_idx` (`produkt_ProductID` ASC),
+  CONSTRAINT `fk_Kommentarer_customer1`
+    FOREIGN KEY (`customer_Användarnamn`)
+    REFERENCES `mydb`.`customer` (`Användarnamn`),
+  CONSTRAINT `fk_Kommentarer_produkt1`
+    FOREIGN KEY (`produkt_ProductID`)
+    REFERENCES `mydb`.`produkt` (`ProductID`))
 
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -30,16 +30,19 @@ if ($result->num_rows > 0) {
         if ($row["Lagersaldo"] > 0) {
             $id = $row["ProductID"];
 			$prodid = $row["ProductID"];
-		    $sql = "SELECT * FROM rating WHERE produkt_ProductID =  '$prodid' ;";
-		    $resultRating = $conn->query($sql);
-		    $rating = mysqli_fetch_array($resultRating);
-		    if(isset($rating["RatingNR"])){
-			    $points = $rating["RatingPoints"];
-			    $nr = $rating["RatingNR"];
-			    $nr = $points / $nr;
-				$nr = $nr . "/5";
-		    } else {
-				$nr = "No rating yet";
+		    $sqlR = "SELECT rating FROM kommentarer WHERE produkt_ProductID = '$prodid';";
+			$resultR = $conn->query($sqlR);
+			$loops = 0;
+			$total = 0;
+			//loopar och räknar ut average av alla ratings på en specifik prodid
+			if ($resultR->num_rows > 0) {
+				while($rowR = mysqli_fetch_array($resultR)){
+					$loops += 1; 
+					$total += $rowR["rating"];
+					$nr = $total / $loops . "/5";
+				}
+			} else { 
+				$nr = "no rating!";
 			}
             //echo $id;
             echo "<span id=\"lst\"><strong>ProductID: </strong>" . $row["ProductID"]
@@ -57,6 +60,9 @@ if ($result->num_rows > 0) {
 		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">
 		  <input type ="hidden" name="action" value="add">
 		  <input type="submit" value="Add to cart" ></form>
+		  <form action="viewRatings.php" method="get">
+		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">
+		  <input type="submit" value="View ratings" ></form>
 		  <?php
 		  
 echo "<br>";
