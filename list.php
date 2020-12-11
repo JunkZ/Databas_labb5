@@ -28,7 +28,6 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = mysqli_fetch_array($result)) {
         if ($row["Lagersaldo"] > 0) {
-            $id = $row["ProductID"];
 			$prodid = $row["ProductID"];
 		    $sqlR = "SELECT rating FROM kommentarer WHERE produkt_ProductID = '$prodid';";
 			$resultR = $conn->query($sqlR);

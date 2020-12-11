@@ -13,9 +13,32 @@ include_once 'dbini/db_handler.php';
 $conn;
 $uName = $_SESSION['username'];
 $admin = $_SESSION["Admin"];
+$action = $_POST["action"];
 
-
-if($admin == "false"){
+if($admin == "true" && $action=="checkAll"){
+	$sql = "SELECT * FROM varukorg WHERE Order_ID IS NOT NULL ;";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		echo "<p>All customer orders:</p>  <br>";
+		// output data of each row
+		while ($row = $result->fetch_assoc()) {
+			$prodid = $row["produkt_ProductID"];
+			$id = $row["Order_ID"];
+			
+			echo "<span id=\"lst\"><strong>OrderNR: </strong>" . $row["Order_ID"]
+			. " | <strong>Customername: </strong>" . $row["Customer_Användarnamn"]
+			. " | <strong>Product ID: </strong>" . $prodid
+			. " | <strong>Kvantitet: </strong>" . $row["Kvantitet"]
+			. "</span>";
+			
+			
+			echo "<br>";
+			
+		}
+	} else {
+		echo "0 results";
+	}
+} else {
 	$sql = "SELECT `Order_ID`,`produkt_ProductID`, Kvantitet FROM `varukorg` WHERE `Customer_Användarnamn`='$uName' AND Order_ID IS NOT NULL ;";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
@@ -51,29 +74,6 @@ if($admin == "false"){
 				<input type="submit" value="Submit">
 				</form>
 			<?php
-			echo "<br>";
-			
-		}
-	} else {
-		echo "0 results";
-	}
-} else {
-	$sql = "SELECT * FROM varukorg WHERE Order_ID IS NOT NULL ;";
-	$result = $conn->query($sql);
-	if ($result->num_rows > 0) {
-		echo "<p>All customer orders:</p>  <br>";
-		// output data of each row
-		while ($row = $result->fetch_assoc()) {
-			$prodid = $row["produkt_ProductID"];
-			$id = $row["Order_ID"];
-			
-			echo "<span id=\"lst\"><strong>OrderNR: </strong>" . $row["Order_ID"]
-			. " | <strong>Customername: </strong>" . $row["Customer_Användarnamn"]
-			. " | <strong>Product ID: </strong>" . $prodid
-			. " | <strong>Kvantitet: </strong>" . $row["Kvantitet"]
-			. "</span>";
-			
-			
 			echo "<br>";
 			
 		}

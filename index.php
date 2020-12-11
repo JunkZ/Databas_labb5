@@ -77,6 +77,7 @@ Password: <input type="text" name="PASS">
     echo 'style="display:none"';
 }
 ?>> 
+<input type="hidden" name="action" value="boo">
 <input type="submit" value="Order history" class="button">
 </body>
 

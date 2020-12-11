@@ -62,6 +62,7 @@ if ($conn->connect_error) {
     }}
 ?>
 <form action="orderhistory.php" method="post" >
+<input type="hidden" name="action" value="boo">
 <input type="submit" value="Order history" class="button">
 </body>
 
