@@ -22,13 +22,13 @@ if ($conn->connect_error) {
 } else {
     try {
         $conn->begin_transaction();
-        $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName' AND Order_ID is NULL;";
+        $sql = "SELECT * FROM varukorg WHERE customer_Användarnamn = '$uName' AND Order_ID is NULL;";
         $result = $conn->query($sql);
         while ($row = mysqli_fetch_array($result)) {
             $sql = "INSERT INTO `order`(`OrderID`) VALUES ('')";
             $conn->query($sql);
             $last_id = $conn->insert_id;
-            $sql = "UPDATE varukorg SET Order_ID = $last_id WHERE Customer_Användarnamn = '$uName'
+            $sql = "UPDATE varukorg SET Order_ID = $last_id WHERE customer_Användarnamn = '$uName'
             AND Order_ID is NULL";
             $conn->query($sql);
 

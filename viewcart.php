@@ -19,7 +19,7 @@ include_once 'dbini/db_handler.php';
 $conn;
 $uName = $_SESSION['username'];
 
-$sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName' AND Order_ID IS NULL;";
+$sql = "SELECT * FROM varukorg WHERE customer_Användarnamn = '$uName' AND Order_ID IS NULL;";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = mysqli_fetch_array($result)) {
