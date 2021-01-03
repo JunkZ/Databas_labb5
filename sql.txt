@@ -56,6 +56,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`order` (
   `OrderID` INT(11) NULL AUTO_INCREMENT,
+  `datum` DATE NULL,
   PRIMARY KEY (`OrderID`))
   DEFAULT CHARACTER SET = utf8mb4;
 
@@ -65,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`order` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`varukorg` (
   `Kvantitet` INT NULL,
+  `orderPris` INT NULL,
   `customer_Användarnamn` VARCHAR(45) NOT NULL,
   `produkt_ProductID` INT(11) NOT NULL,
   `Order_ID` INT(11) NULL,

@@ -22,17 +22,14 @@ if ($conn->connect_error) {
 } else {
     try {
         $conn->begin_transaction();
-        $sql = "SELECT * FROM varukorg WHERE customer_Användarnamn = '$uName' AND Order_ID is NULL;";
-        $result = $conn->query($sql);
+		$sql = "SELECT * FROM varukorg WHERE customer_Användarnamn = '$uName' AND Order_ID is NULL;";
+		$result = $conn->query($sql);
+		$sql = "INSERT INTO `order`(`datum`) VALUES (CURDATE())";
+        $conn->query($sql);
         while ($row = mysqli_fetch_array($result)) {
-            $sql = "INSERT INTO `order`(`OrderID`) VALUES ('')";
-            $conn->query($sql);
+			 //get needed new value for update lagersaldo
+			 
             $last_id = $conn->insert_id;
-            $sql = "UPDATE varukorg SET Order_ID = $last_id WHERE customer_Användarnamn = '$uName'
-            AND Order_ID is NULL";
-            $conn->query($sql);
-
-            //get needed new value for update lagersaldo
             $prodid = $row["produkt_ProductID"];
             $quantity = $row["Kvantitet"];
             $sql = "SELECT * FROM produkt WHERE ProductID = $prodid;";
@@ -51,6 +48,22 @@ if ($conn->connect_error) {
                 echo "Last quantity has already been ordered";
                 $conn->rollback();
             }
+            $sql = "UPDATE varukorg SET Order_ID = $last_id WHERE customer_Användarnamn = '$uName'
+            AND Order_ID is NULL;";
+            $conn->query($sql);
+		    $sql = "SELECT produkt_ProductID FROM varukorg WHERE Order_ID = $last_id;";
+			$resultR = $conn->query($sql);
+			while($rowR = mysqli_fetch_array($resultR)){
+				$id = $rowR["produkt_ProductID"];
+				$sql = "SELECT Pris FROM produkt WHERE ProductID = $id;";
+				$resultP = $conn->query($sql);
+				$price = mysqli_fetch_array($resultP);
+				$price = $price["Pris"];
+				$sql = "UPDATE varukorg SET orderPris = $price WHERE produkt_ProductID = $id
+				AND Order_ID = $last_id;";
+				$conn->query($sql);	
+			}
+           
 
         }
 
