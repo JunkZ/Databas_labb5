@@ -32,9 +32,6 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`customer` (
   `Användarnamn` VARCHAR(45) NOT NULL,
-  `Födelsedag` VARCHAR(45) NULL,
-  `Address` VARCHAR(45) NULL,
-  `TelefonNR` VARCHAR(45) NULL,
   `Lösenord` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Användarnamn`)
 )
@@ -56,6 +53,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`order` (
   `OrderID` INT(11) NULL AUTO_INCREMENT,
+  `Namn` VARCHAR(45) NULL,
+  `Address` VARCHAR(45) NULL,
+  `TelefonNR` VARCHAR(45) NULL,
   `datum` DATE NULL,
   PRIMARY KEY (`OrderID`))
   DEFAULT CHARACTER SET = utf8mb4;
@@ -88,21 +88,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`varukorg` (
 
 
 DEFAULT CHARACTER SET = utf8mb4;
-
--- -----------------------------------------------------
--- Table `mydb`.`kategorier`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`kategorier` (
-  `KategoriID` INT(11) NULL,
-  `ProductID` INT(11) NOT NULL,
-  `KategoriNamn` VARCHAR(45) NOT NULL,
-  INDEX `fk_kategorier_produkt1_idx` (`ProductID` ASC),
-  PRIMARY KEY (`KategoriID`),
-  CONSTRAINT `fk_kategorier_produkt1`
-    FOREIGN KEY (`ProductID`)
-    REFERENCES `mydb`.`produkt` (`ProductID`))
-DEFAULT CHARACTER SET = utf8mb4;
-
 
 -- -----------------------------------------------------
 -- Table `mydb`.`kommentarer`

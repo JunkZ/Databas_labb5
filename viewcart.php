@@ -46,5 +46,11 @@ if ($result->num_rows > 0) {
 ?>
 </body>
 <form action="checkout.php" method="post" >
+<input type="text" name="name" placeholder="Name ..." required>
+<br>
+<input type="text" name="number" placeholder="Phonenumber ..." required>
+<br>
+<input type="text" name="address" placeholder="Address ..." required>
+<br>
 <input type="submit" value="Checkout" class="button">
 </html>

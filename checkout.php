@@ -16,6 +16,9 @@ include_once 'dbini/db_handler.php';
 include_once 'dbini/db_handler.php';
 $conn;
 $uName = $_SESSION['username'];
+$NAME = $_POST["name"];
+$NUMBER = $_POST["number"];
+$ADDRESS = $_POST["address"];
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -24,7 +27,10 @@ if ($conn->connect_error) {
         $conn->begin_transaction();
 		$sql = "SELECT * FROM varukorg WHERE customer_Användarnamn = '$uName' AND Order_ID is NULL;";
 		$result = $conn->query($sql);
-		$sql = "INSERT INTO `order`(`datum`) VALUES (CURDATE())";
+        $sql = "  INSERT INTO `order`(`Namn`, `Address`, `TelefonNR`, `datum`) 
+        VALUES ('$NAME','$ADDRESS','$NUMBER',CURDATE())";
+        
+
         $conn->query($sql);
         while ($row = mysqli_fetch_array($result)) {
 			 //get needed new value for update lagersaldo
