@@ -24,14 +24,20 @@ if($admin == "true" && $action=="checkAll"){
 		$summa = 0;
 		while ($row = $result->fetch_assoc()) {
 			$id = $row['Order_ID'];
-			$sql = "SELECT datum FROM `order` WHERE OrderID = $id;";
-			$datum = $conn->query($sql);
-			$datum = $datum->fetch_assoc();
-			$datum = $datum['datum'];
+			$sql = "SELECT datum, Namn, Address, TelefonNR FROM `order` WHERE OrderID = $id;";
+			$info = $conn->query($sql);
+			$info = $info->fetch_assoc();
+			$datum = $info['datum'];
+			$Namn = $info['Namn'];
+			$TelefonNR = $info['TelefonNR'];
+			$Address = $info['Address'];
 			
 			echo "<br>";
 			echo "<br>";
 			echo "ORDER ID: ",  $id ,"  beställningsdatum: ", $datum , "<br>";
+			echo  "Name: ", $Namn ;
+			echo  " Number: ", $TelefonNR;
+			echo  " Address: ", $Address , "<br>";
 			$sql = "SELECT `produkt_ProductID`, Kvantitet, customer_Användarnamn, orderPris FROM `varukorg` WHERE Order_ID = $id ;";
 			$resultO = $conn->query($sql);
 			$summa = 0;
