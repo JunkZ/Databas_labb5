@@ -69,7 +69,7 @@
   margin: 4px 2px;
   cursor: pointer;
   position: relative;
-  left: 73%;
+  left: 72%;
   
 }
 .buttonadmin {
@@ -87,6 +87,21 @@
   position: relative;
   left: 75%;
   
+}
+.buttonhistory {
+  display: flex;
+  background-color:  rgb(13, 51, 100);
+  border:2px solid #131111;
+  color: rgb(255, 255, 255);
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: relative;
+  left: 31%;
 }
 .button:hover {
   background: rgb(87, 175, 216)  ;
