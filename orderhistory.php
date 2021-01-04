@@ -80,7 +80,7 @@ if($admin == "true" && $action=="checkAll"){
 				echo "<span id=\"lst\"><strong>Product ID: </strong>" . $prodid
 				. " | <strong>Kvantitet: </strong>" . $rowO["Kvantitet"]
 				. " | <strong>Pris styck: </strong>" . $rowO["orderPris"]
-				. " | <strong>Kvantitet: </strong>" . $ratedStatus
+				. " | <strong>Betygstatus: </strong>" . $ratedStatus
 				. "</span>";
 				
 				?>
