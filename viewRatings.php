@@ -36,6 +36,15 @@ if ($result->num_rows > 0) {
 	  }else  {
 		echo "~User made no comment~    " . $row["rating"] . "/5    "  . $row["customer_Användarnamn"] . "   " .  $row["datum"];
 	  }
+	  ?>
+		  <form action="updateRatings.php" method="post" <?php if ($_SESSION["Admin"] == "false" OR $row["comment"] == NULL ) {
+                echo 'style="display:none"';
+            }
+            ?>>
+		  <input type="hidden" name="commentID" value="<?php echo $row["commentID"]; ?>">
+		  <input type ="hidden" name="action" value="delete">
+		  <input type="submit" value="delete comment" ></form>
+		  <?php
 	  echo "<br>";
 }
 } else {
