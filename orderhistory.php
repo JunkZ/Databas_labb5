@@ -21,6 +21,7 @@ if($admin == "true" && $action=="checkAll"){
 	if ($result->num_rows > 0) {
 		// output data of each row
 		echo "<p>Previous orders:</p>  <br>";
+		$summa = 0;
 		while ($row = $result->fetch_assoc()) {
 			$id = $row['Order_ID'];
 			$sql = "SELECT datum FROM `order` WHERE OrderID = $id;";
@@ -41,8 +42,13 @@ if($admin == "true" && $action=="checkAll"){
 				. " | <strong>Pris styck: </strong>" . $rowO["orderPris"]
 				. "</span>";
 				echo "<br>";
+				//$summa = $summa + $rowO["Kvantitet"]*$rowO["orderPris"];
 		}
+
+		//echo "Order ".$id." Summa: " . $summa;
+		//echo "<br>";
 		}
+		
 	} else {
 		echo "0 results";
 	}
@@ -109,9 +115,10 @@ if($admin == "true" && $action=="checkAll"){
 					<input type="submit" value="Submit">
 					</form>
 				<?php
-				echo "Order ".$id." Summa: " . $summa;
-				echo "<br>";
+				
 			}
+			echo "Order ".$id." Summa: " . $summa;
+			echo "<br>";
 		}
 	} else {
 		echo "0 results";
