@@ -19,25 +19,25 @@ $prodid = $_POST["prodid"];
 $uName = $_SESSION['username'];
 
 if ($action == "add") {
-    $sql = "SELECT * FROM varukorg WHERE Customer_Användarnamn = '$uName'
+    $sql = "SELECT * FROM varukorg WHERE customer_Användarnamn = '$uName'
     AND produkt_ProductID = '$prodid' AND Order_ID is NULL;";
     $result = $conn->query($sql);
 
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_array($result);
         $newValue = $row["Kvantitet"] + 1;
-        $sql = "UPDATE varukorg SET Kvantitet = $newValue WHERE Customer_Användarnamn = '$uName'
+        $sql = "UPDATE varukorg SET Kvantitet = $newValue WHERE customer_Användarnamn = '$uName'
         AND produkt_ProductID = '$prodid'
         AND Order_ID is NULL;";
         $conn->query($sql);
     } else {
-        $sql = "INSERT INTO varukorg (Kvantitet,Customer_Användarnamn,produkt_ProductID,Order_ID)
-        VALUES (1,'$uName', '$prodid',NULL);";
+        $sql = "INSERT INTO varukorg (Kvantitet,customer_Användarnamn,produkt_ProductID)
+        VALUES (1,'$uName', '$prodid');";
         $conn->query($sql);
     }
     echo "successfully added to cart";
 } else if ($action == "deleteWhole") {
-    $sql = "DELETE FROM varukorg WHERE Customer_Användarnamn = '$uName' AND produkt_ProductID = '$prodid' AND Order_ID IS NULL;";
+    $sql = "DELETE FROM varukorg WHERE customer_Användarnamn = '$uName' AND produkt_ProductID = '$prodid' AND Order_ID IS NULL;";
     $conn->query($sql);
     echo "successfully removed from cart";
 }

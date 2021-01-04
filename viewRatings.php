@@ -32,8 +32,19 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = mysqli_fetch_array($result)) {
       if($row["comment"] != ""){
-	  echo $row["comment"] . "  " . $row["rating"] . "/5    "  . $row["customer_Användarnamn"] . "   " .  $row["datum"];
+		echo $row["comment"] . "  " . $row["rating"] . "/5    "  . $row["customer_Användarnamn"] . "   " .  $row["datum"];
+	  }else  {
+		echo "~User made no comment~    " . $row["rating"] . "/5    "  . $row["customer_Användarnamn"] . "   " .  $row["datum"];
 	  }
+	  ?>
+		  <form action="updateRatings.php" method="post" <?php if ($_SESSION["Admin"] == "false" OR $row["comment"] == NULL ) {
+                echo 'style="display:none"';
+            }
+            ?>>
+		  <input type="hidden" name="commentID" value="<?php echo $row["commentID"]; ?>">
+		  <input type ="hidden" name="action" value="delete">
+		  <input type="submit" value="delete comment" ></form>
+		  <?php
 	  echo "<br>";
 }
 } else {

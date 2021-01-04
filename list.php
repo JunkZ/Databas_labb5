@@ -16,7 +16,7 @@ session_start();
     echo 'style="display:none"';
 }
 ?>>
-	<input type="submit" value="View cart" class="buttonlogout">
+	<input type="submit" value="View cart" class="button">
 	</form>
     <h1 class=serif> Product list: </h1>
     <?php
@@ -28,7 +28,6 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = mysqli_fetch_array($result)) {
         if ($row["Lagersaldo"] > 0) {
-            $id = $row["ProductID"];
 			$prodid = $row["ProductID"];
 		    $sqlR = "SELECT rating FROM kommentarer WHERE produkt_ProductID = '$prodid';";
 			$resultR = $conn->query($sqlR);
@@ -59,10 +58,10 @@ if ($result->num_rows > 0) {
             ?>>
 		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">
 		  <input type ="hidden" name="action" value="add">
-		  <input type="submit" value="Add to cart" ></form>
+		  <input type="submit" value="Add to cart" class="button"></form>
 		  <form action="viewRatings.php" method="get">
 		  <input type="hidden" name="prodid" value="<?php echo $row["ProductID"]; ?>">
-		  <input type="submit" value="View ratings" ></form>
+		  <input type="submit" value="View ratings" class="button"></form>
 		  <?php
 		  
 echo "<br>";
@@ -74,18 +73,6 @@ echo "<br>";
     }
 } else {
     echo "Inga resultat!";
-}
-$sql = "SELECT * FROM kategorier";
-$result = $conn->query($sql);
-echo "<br><h1 class=serif>Category list: </h1>";
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<span id=\"lst\"><strong>ProductID FK: </strong>" . $row["ProductID"]
-            . " | <strong>Kategori Namn: </strong>" . $row["ProductName"]
-            . "</span><br>";
-    }
-} else {
-    echo "No results!";
 }
 $conn->close();
 

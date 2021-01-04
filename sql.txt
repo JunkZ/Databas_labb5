@@ -28,84 +28,86 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Customer`
+-- Table `mydb`.`customer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Customer` (
+CREATE TABLE IF NOT EXISTS `mydb`.`customer` (
   `Användarnamn` VARCHAR(45) NOT NULL,
   `Födelsedag` VARCHAR(45) NULL,
   `Address` VARCHAR(45) NULL,
-  `Telefon NR` VARCHAR(45) NULL,
+  `TelefonNR` VARCHAR(45) NULL,
   `Lösenord` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Användarnamn`)
 )
 DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`Adminstrator` (
-  `Admin Flagga` INT NOT NULL,
-  `Customer_Användarnamn` VARCHAR(45) NOT NULL,
-  INDEX `fk_Adminstrator_Customer1_idx` (`Customer_Användarnamn` ASC),
-  PRIMARY KEY (`Customer_Användarnamn`),
-  CONSTRAINT `fk_Adminstrator_Customer1`
-    FOREIGN KEY (`Customer_Användarnamn`)
-    REFERENCES `mydb`.`Customer` (`Användarnamn`)
+CREATE TABLE IF NOT EXISTS `mydb`.`adminstrator` (
+  `AdminFlagga` INT NOT NULL,
+  `customer_Användarnamn` VARCHAR(45) NOT NULL,
+  INDEX `fk_adminstrator_customer1_idx` (`customer_Användarnamn` ASC),
+  PRIMARY KEY (`customer_Användarnamn`),
+  CONSTRAINT `fk_adminstrator_customer1`
+    FOREIGN KEY (`customer_Användarnamn`)
+    REFERENCES `mydb`.`customer` (`Användarnamn`)
 )
 DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Order`
+-- Table `mydb`.`order`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Order` (
+CREATE TABLE IF NOT EXISTS `mydb`.`order` (
   `OrderID` INT(11) NULL AUTO_INCREMENT,
+  `datum` DATE NULL,
   PRIMARY KEY (`OrderID`))
   DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Varukorg`
+-- Table `mydb`.`varukorg`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Varukorg` (
+CREATE TABLE IF NOT EXISTS `mydb`.`varukorg` (
   `Kvantitet` INT NULL,
-  `Customer_Användarnamn` VARCHAR(45) NOT NULL,
+  `orderPris` INT NULL,
+  `customer_Användarnamn` VARCHAR(45) NOT NULL,
   `produkt_ProductID` INT(11) NOT NULL,
   `Order_ID` INT(11) NULL,
   `VarukorgID` INT NOT NULL AUTO_INCREMENT,
-  INDEX `fk_Varukorg_Customer1_idx` (`Customer_Användarnamn` ASC),
-  INDEX `fk_Varukorg_produkt1_idx` (`produkt_ProductID` ASC),
-  INDEX `fk_Varukorg_Order1_idx` (`Order_ID` ASC),
+  INDEX `fk_varukorg_customer1_idx` (`customer_Användarnamn` ASC),
+  INDEX `fk_varukorg_produkt1_idx` (`produkt_ProductID` ASC),
+  INDEX `fk_varukorg_order1_idx` (`Order_ID` ASC),
   PRIMARY KEY (`VarukorgID`),
   
-  CONSTRAINT `fk_Varukorg_Customer1`
-    FOREIGN KEY (`Customer_Användarnamn`)
-    REFERENCES `mydb`.`Customer` (`Användarnamn`),
-  CONSTRAINT `fk_Varukorg_produkt1`
+  CONSTRAINT `fk_varukorg_customer1`
+    FOREIGN KEY (`customer_Användarnamn`)
+    REFERENCES `mydb`.`customer` (`Användarnamn`),
+  CONSTRAINT `fk_varukorg_produkt1`
     FOREIGN KEY (`produkt_ProductID`)
     REFERENCES `mydb`.`produkt` (`ProductID`),
-  CONSTRAINT `fk_Varukorg_Order1`
+  CONSTRAINT `fk_varukorg_order1`
     FOREIGN KEY (`Order_ID`)
-    REFERENCES `mydb`.`Order` (`OrderID`))
+    REFERENCES `mydb`.`order` (`OrderID`))
 
 
 DEFAULT CHARACTER SET = utf8mb4;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Kategorier`
+-- Table `mydb`.`kategorier`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Kategorier` (
+CREATE TABLE IF NOT EXISTS `mydb`.`kategorier` (
   `KategoriID` INT(11) NULL,
   `ProductID` INT(11) NOT NULL,
-  `Kategori Namn` VARCHAR(45) NOT NULL,
-  INDEX `fk_Kategorier_produkt1_idx` (`ProductID` ASC),
+  `KategoriNamn` VARCHAR(45) NOT NULL,
+  INDEX `fk_kategorier_produkt1_idx` (`ProductID` ASC),
   PRIMARY KEY (`KategoriID`),
-  CONSTRAINT `fk_Kategorier_produkt1`
+  CONSTRAINT `fk_kategorier_produkt1`
     FOREIGN KEY (`ProductID`)
     REFERENCES `mydb`.`produkt` (`ProductID`))
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Kommentarer`
+-- Table `mydb`.`kommentarer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Kommentarer` (
+CREATE TABLE IF NOT EXISTS `mydb`.`kommentarer` (
   `commentID` INT NOT NULL AUTO_INCREMENT,
   `comment` TEXT(100) NULL,
   `rating` INT NOT NULL,
@@ -113,12 +115,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Kommentarer` (
   `produkt_ProductID` INT(11) NOT NULL,
   `datum` DATE NULL,
   PRIMARY KEY (`commentID`),
-  INDEX `fk_Kommentarer_customer1_idx` (`customer_Användarnamn` ASC),
+  INDEX `fk_kommentarer_customer1_idx` (`customer_Användarnamn` ASC),
   INDEX `fk_Kommentarer_produkt1_idx` (`produkt_ProductID` ASC),
-  CONSTRAINT `fk_Kommentarer_customer1`
+  CONSTRAINT `fk_kommentarer_customer1`
     FOREIGN KEY (`customer_Användarnamn`)
     REFERENCES `mydb`.`customer` (`Användarnamn`),
-  CONSTRAINT `fk_Kommentarer_produkt1`
+  CONSTRAINT `fk_kommentarer_produkt1`
     FOREIGN KEY (`produkt_ProductID`)
     REFERENCES `mydb`.`produkt` (`ProductID`))
 

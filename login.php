@@ -18,7 +18,7 @@ $PASS = $_POST["PASS"];
 
 $sql = "SELECT * FROM customer WHERE Användarnamn ='$ANAMN'AND Lösenord = '$PASS';";
 $resultANAMN = $conn->query($sql);
-$sqlADMIN = "SELECT * FROM adminstrator WHERE Customer_Användarnamn ='$ANAMN';";
+$sqlADMIN = "SELECT * FROM adminstrator WHERE customer_Användarnamn ='$ANAMN';";
 $resultADMIN = $conn->query($sqlADMIN);
 $row = $resultANAMN->fetch_assoc();
 $row2 = $resultADMIN->fetch_assoc();
@@ -27,7 +27,7 @@ if ($row['Användarnamn'] == $ANAMN && $row['Lösenord'] == $PASS) {
     $_SESSION["loggedIN"] = "true";
     $_SESSION["username"] = $row['Användarnamn'];
     echo "You have successfully logged in as ", $row['Användarnamn'], "<br>And you are ";
-    if (isset($row2['Admin Flagga'])) {
+    if (isset($row2['AdminFlagga'])) {
         echo "an Admin!";
         $_SESSION["Admin"] = "true";
     } else {

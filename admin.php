@@ -29,6 +29,10 @@ if ($_SESSION["Admin"] != "true") {
     echo "välkommen herr admin";
 }
 ?>
+<form action="orderhistory.php" method="post">
+<input type="hidden" name="action" value="checkAll">
+<input type="submit" value="Check all orders" class="button">
+</form>
 
 </body>
 </html>
