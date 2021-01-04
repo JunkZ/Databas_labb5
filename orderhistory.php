@@ -4,6 +4,9 @@ session_start();
 ?>
 <html>
 <body>
+<head>
+      <link rel="stylesheet" href="css/search.css"/>
+    </head>
 <form action="index.php" method="post" >
 <input type="submit" value="Back to home" class="button">
 </form>
@@ -72,10 +75,10 @@ if($admin == "true" && $action=="checkAll"){
 				$resultR = $conn->query($sql);
 				if ($resultR->num_rows > 0) {
 					$alreadyRated = "true";
-					$ratedStatus = "edit rating: ";
+					$ratedStatus = "already rated product!";
 				} else { 
 					$alreadyRated = "false";
-					$ratedStatus = "rate purchase: ";
+					$ratedStatus = "not rated, rate your purchase below!";
 				}
 				echo "<span id=\"lst\"><strong>Product ID: </strong>" . $prodid
 				. " | <strong>Kvantitet: </strong>" . $rowO["Kvantitet"]
@@ -87,25 +90,15 @@ if($admin == "true" && $action=="checkAll"){
 				
 					<form action="updateRatings.php" method="post"<?php if ($alreadyRated == "true") {
 					echo 'style="display:none"';
-					} 
+		} else {
+			echo 'style="display: inline"';
+		}
 		?>>
 					
 					<input type="hidden" name="prodid" value="<?php echo $rowO["produkt_ProductID"]; ?>">
-					<input type ="hidden" name="action" value="rate">
 					<input type="text" name="comment">
-					<input type="number" name="rating" min="1" max="5" value = 3>
-					<input type="submit" value="Submit">
-					</form>
-					<form action="updateRatings.php" method="post"<?php if ($alreadyRated == "false") {
-					echo 'style="display:none"';
-					} 
-		?>>
-					
-					<input type="hidden" name="prodid" value="<?php echo $rowO["produkt_ProductID"]; ?>">
-					<input type ="hidden" name="action" value="edit">
-					<input type="text" name="comment">
-					<input type="number" name="rating" min="1" max="5" value = 3>
-					<input type="submit" value="Submit">
+					<input type="number" name="rating" min="1" max="5">
+					<input type="submit" value="Submit" class="button">
 					</form>
 				<?php
 				echo "<br>";
