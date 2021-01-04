@@ -66,6 +66,7 @@ if($admin == "true" && $action=="checkAll"){
 
 			$sql = "SELECT `produkt_ProductID`, Kvantitet, orderPris FROM `varukorg` WHERE Order_ID = $id ;";
 			$resultO = $conn->query($sql);
+			$summa = 0;
 			while ($rowO = $resultO->fetch_assoc()) {
 				$prodid = $rowO["produkt_ProductID"];
 				$sql = "SELECT * FROM kommentarer WHERE customer_Användarnamn ='$uName' AND produkt_ProductID ='$prodid';";
@@ -82,7 +83,7 @@ if($admin == "true" && $action=="checkAll"){
 				. " | <strong>Pris styck: </strong>" . $rowO["orderPris"]
 				. " | <strong>Betygstatus: </strong>" . $ratedStatus
 				. "</span>";
-				
+				$summa = $summa + $rowO["Kvantitet"]*$rowO["orderPris"];
 				?>
 				
 					<form action="updateRatings.php" method="post"<?php if ($alreadyRated == "true") {
@@ -108,6 +109,7 @@ if($admin == "true" && $action=="checkAll"){
 					<input type="submit" value="Submit">
 					</form>
 				<?php
+				echo "Order ".$id." Summa: " . $summa;
 				echo "<br>";
 			}
 		}
