@@ -34,6 +34,7 @@ if($admin == "true" && $action=="checkAll"){
 			echo "ORDER ID: ",  $id ,"  beställningsdatum: ", $datum , "<br>";
 			$sql = "SELECT `produkt_ProductID`, Kvantitet, customer_Användarnamn, orderPris FROM `varukorg` WHERE Order_ID = $id ;";
 			$resultO = $conn->query($sql);
+			$summa = 0;
 			while ($rowO = $resultO->fetch_assoc()) {
 				$prodid = $rowO["produkt_ProductID"];
 				echo "<span id=\"lst\"><strong>Product ID: </strong>" . $prodid
@@ -42,11 +43,11 @@ if($admin == "true" && $action=="checkAll"){
 				. " | <strong>Pris styck: </strong>" . $rowO["orderPris"]
 				. "</span>";
 				echo "<br>";
-				//$summa = $summa + $rowO["Kvantitet"]*$rowO["orderPris"];
+				$summa = $summa + $rowO["Kvantitet"]*$rowO["orderPris"];
 		}
 
-		//echo "Order ".$id." Summa: " . $summa;
-		//echo "<br>";
+		echo "Order ".$id." Summa: " . $summa;
+		echo "<br>";
 		}
 		
 	} else {
